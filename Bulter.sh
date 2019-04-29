@@ -1,5 +1,5 @@
 git add .
-git commit -m 'a little addition to my page'
+git commit -m 'Update to my Leetcode'
 git push
 
 echo '
