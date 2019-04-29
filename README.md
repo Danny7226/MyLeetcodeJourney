@@ -1,2 +1,2 @@
 # MyLeetcodeJourney
-My own solution to Leetcode test
+My own solution to Leetcode tests
