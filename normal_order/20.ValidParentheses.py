@@ -1,6 +1,6 @@
 '''
 
-tag: stack, hash_table
+tags: stack, hash_table
 
 20. Valid Parentheses
 
