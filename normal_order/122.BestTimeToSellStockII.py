@@ -33,3 +33,43 @@ Explanation: In this case, no transaction is done, i.e. max profit = 0.
 
 '''
 
+prices = [2,1,2,1,0,0,1]
+
+class Solution:
+    def maxProfit(self, prices: list) -> int:
+        profit = 0
+        if len(prices) <= 1:
+            return profit
+        low = prices[0]
+        # solution 1
+        # for i in range(1, len(prices)):
+        #     if i < len(prices)-1 and prices[i-1] >= prices[i] and prices[i] < prices[i+1]:
+        #         print('1:',i)
+        #         low = prices[i]
+        #     elif prices[i-1] < prices[i]:
+        #         if i == len(prices) -1:
+        #             print('2.1:',i, end = '')
+        #             profit += prices[-1] - low
+        #             print('  profit:',profit)                
+        #         elif prices[i] >= prices[i+1]:
+        #             print('2.2:',i, end = '')
+        #             peak = prices[i]
+        #             profit += peak - low
+        #             print('  profit:',profit)   
+
+        # solution 2
+        # This solution follows the logic used in Approach 2 itself, but with only a slight 
+        # variation. In this case, instead of looking for every peak following a valley, we
+        # can simply go on crawling over the slope and keep on adding the profit obtained from
+        # every consecutive transaction. In the end,we will be using the peaks and valleys 
+        # effectively, but we need not track the costs corresponding to the peaks and valleys along
+        # with the maximum profit, but we can directly keep on adding the difference between the
+        # consecutive numbers of the array if the second number is larger than the first one, and
+        # at the total sum we obtain will be the maximum profit.        
+        for i in range(1, len(prices)):
+            if prices[i] > prices[i-1]:
+                profit += prices[i] - prices[i-1]                           
+        return profit
+
+s = Solution()
+print(s.maxProfit(prices))        
