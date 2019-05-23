@@ -49,6 +49,5 @@ class Solution(object):
             n = n // 26  
             if y == 0:
                 n -= 1
-
             output = hash_table[y] + output
         return output
