@@ -38,6 +38,20 @@ class Solution:
         return int(s, base = 2)
 
 class Solution:
+    # @param n, an integer
+    # @return an integer
+    def reverseBits(self, n):
+        output = ''
+        # print(str(n & 1))
+        count = 32
+        while count:
+            output += str(n & 1)
+            n = n >> 1
+            # print(n)
+            count -= 1
+        return int(output, base = 2)
+        
+class Solution:
     # bit manipulation
     def reverseBits(self, n):
 

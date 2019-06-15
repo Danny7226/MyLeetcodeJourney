@@ -15,14 +15,14 @@ Because nums[0] + nums[1] = 2 + 7 = 9,
 return [0, 1].
 
 '''
+nums, target = [3,2,4], 6
+
 
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
-        l = []
-        tmp = {}
+        hash_table = {}
         for i in range(len(nums)):
-            left = target - nums[i]
-            if nums[i] in tmp:
-                l = [tmp[nums[i]],i]
-            else: tmp[left] = i
-        return l
+            if nums[i] in hash_table:
+                return [hash_table[nums[i]], i]
+            else:
+                hash_table[target - nums[i]] = i        

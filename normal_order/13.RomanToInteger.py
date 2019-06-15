@@ -48,30 +48,41 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 
 s = 'IV'
 class Solution:
-    def romanToInt(s: str) -> int:
-        roman = {'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}
-        index = 0
-        numeral = 0
-        
-        while(index < len(s)):
-            if (index != len(s)-1):
-                # print(s[index+1])
-                # print(roman[s[index]], roman[s[index+1]])
-                if (roman[s[index]] >= roman[s[index+1]]):
-                    numeral += roman[s[index]]
-                    index += 1
-                    continue
-                else:
-                    numeral += (roman[s[index+1]] - roman[s[index]])
-                    index += 2
-                    # print(numeral)
-                    continue
-                
+    def romanToInt(self, s: str) -> int:
+        hash_table = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+        ans = 0
+        for i in range(len(s)):
+            if (i < len(s) - 1) and (hash_table[s[i]] < hash_table[s[i+1]]):
+                ans -= hash_table[s[i]]
             else:
-                numeral += roman[s[index]]
-                break
+                ans += hash_table[s[i]]
+        return ans
+        
+# class Solution:
+#     def romanToInt(s: str) -> int:
+#         roman = {'I':1,'V':5,'X':10,'L':50,'C':100,'D':500,'M':1000}
+#         index = 0
+#         numeral = 0
+        
+#         while(index < len(s)):
+#             if (index != len(s)-1):
+#                 # print(s[index+1])
+#                 # print(roman[s[index]], roman[s[index+1]])
+#                 if (roman[s[index]] >= roman[s[index+1]]):
+#                     numeral += roman[s[index]]
+#                     index += 1
+#                     continue
+#                 else:
+#                     numeral += (roman[s[index+1]] - roman[s[index]])
+#                     index += 2
+#                     # print(numeral)
+#                     continue
                 
-        return numeral
+#             else:
+#                 numeral += roman[s[index]]
+#                 break
+                
+#         return numeral
 
 # class Solution:
 #     def romanToInt(s: str) -> int:

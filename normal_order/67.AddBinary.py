@@ -21,14 +21,14 @@ Output: "10101"
 
 '''
 
-a = '11'
-b = '1'
+a = '0'
+b = '0'
 class Solution:
     def addBinary(self, a:str, b:str) -> str:
         a = int(a, base = 2)
         b = int(b, base = 2)
         sum = a + b
-        print(type(a))
+        # print(type(a))
         # int(a, 2) returns <class 'int'>v
         return bin(sum)[2:]
         # bin() returns a binary string!!!!
