@@ -65,7 +65,6 @@ class Solution:
         return self.sortArray(left) + mid + self.sortArray(right)
 
 class Solution:
-    # merge sort
     def sortArray(self, nums: List[int]) -> List[int]:
         # Merge Sort Recursion
         leng = len(nums)
