@@ -30,33 +30,30 @@ Could you do this in one pass?
 #         self.next = None
 
 class Solution:
-	# two pass solution: 40ms, faster than 92.29%
+    # one pass solution with O(n) time, O(1) space
     def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
-        leng = 0
-        loop = head
-        while (loop):
-            leng += 1
-            loop = loop.next
+        dummy = ListNode(None) # dummy matters
+        dummy.next = head
+        ptr1 = ptr2 = dummy
+        while n:
+            ptr2 = ptr2.next
+            n -= 1
+        while ptr2.next:
+            ptr1 = ptr1.next
+            ptr2 = ptr2.next
+        ptr1.next = ptr1.next.next
+        return dummy.next
 
-        cut = leng - n
-               
-        tmp = head
-        if (cut == 0):
+class Solution:
+    def removeNthFromEnd(self, head, n):
+        fast = slow = head
+        for _ in range(n):
+            fast = fast.next
+        if not fast:
             return head.next
-        for i in range(cut-1):
-            tmp = tmp.next
-        tmp.next = tmp.next.next
+        while fast.next:
+            fast = fast.next
+            slow = slow.next
+        slow.next = slow.next.next
         return head
 
-# class Solution:
-#     def removeNthFromEnd(self, head, n):
-#         fast = slow = head
-#         for _ in range(n):
-#             fast = fast.next
-#         if not fast:
-#             return head.next
-#         while fast.next:
-#             fast = fast.next
-#             slow = slow.next
-#         slow.next = slow.next.next
-#         return head

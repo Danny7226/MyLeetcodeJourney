@@ -33,18 +33,15 @@ class ListNode:
 
 class Solution:
     def deleteDuplicates(self, head: ListNode) -> ListNode:
-        count = 0
-        tmp = head
-        while(tmp):
-            count += 1
-            tmp = tmp.next
-        tmp = head
-        for i in range(count-1):
-            if tmp.val == tmp.next.val:
-                tmp.next = tmp.next.next
+        if not head:
+            return
+        output = head
+        while head.next:
+            if head.val == head.next.val:
+                head.next = head.next.next
             else:
-                tmp = tmp.next
-        return head
+                head = head.next
+        return output
 
 class Solution:
     # one pass solution

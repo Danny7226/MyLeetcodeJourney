@@ -72,6 +72,23 @@ class Solution(object):
             else:
                 ptr2 = ptr2.next
         return ptr1
+    def getIntersectionNode(self, headA, headB):
+        """
+        :type head1, head1: ListNode
+        :rtype: ListNode
+        """
+        p, q = headA, headB
+        if not p or not q:
+            return None
+        while p != q:
+            p, q = p.next, q.next
+            if not p:
+                if not q:
+                    break
+                p = headB
+            if not q:
+                q = headA
+        return p        
 
 class Solution(object):
 	# in linear memory and O(n) run time

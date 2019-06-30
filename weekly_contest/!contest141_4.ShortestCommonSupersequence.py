@@ -22,19 +22,16 @@ The answer provided is the shortest such string that satisfies these properties.
 
 '''
 str1, str2 = "bbbaaaba", "bbababbb"
-class Solution:
-    def shortestCommonSupersequence(self, str1: str, str2: str) -> str:
-        if len(str1) > len(str2):
-            str1, str2 = str2, str1
-        ptr = 0
-        output = list(str2)
-        for i in range(len(str1)):
-            if str1[i] in output[ptr:]:
-                ptr = str2.index(str1[i]) + 1
+def lcs(A, B):
+    n, m = len(A), len(B)
+    dp = [["" for _ in range(m + 1)] for _ in range(n + 1)]
+    for i in range(n):
+        for j in range(m):
+            if A[i] == B[j]:
+                dp[i + 1][j + 1] = dp[i][j] + A[i]
             else:
-                output.insert(ptr,str1[i])
-                ptr += 1
-        return ''.join(output)
+                dp[i + 1][j + 1] = max(dp[i + 1][j], dp[i][j + 1], key=len)
+    print(dp)
+    return dp[-1][-1]   
 
-s = Solution()
-print(s.shortestCommonSupersequence(str1,str2))        
+print(lcs(str1,str2))

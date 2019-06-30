@@ -57,21 +57,17 @@ class ListNode:
         print(output)
 
 
-class Solution(object):
+class Solution:
+    # @param head, a ListNode
+    # @return a list node
     def detectCycle(self, head):
-        """
-        :type head: ListNode
-        :rtype: ListNode
-        """
-        hash_table = {}
-        n = 0        
+        hash_table = set()
         while head:
-            if head in hash_table:
-                return head
-            else:
-                hash_table[head] = n
-                n += 1
+            if head not in hash_table:
+                hash_table.add(head)
                 head = head.next
+            else:
+                return head
         return None
 
 class Solution:
@@ -82,23 +78,19 @@ class Solution:
     # Assume fast has traveled n loops in the cycle, we have:
     # 2H + 2D = H + D + nL  -->  H + D = nL  --> H = nL - D    
     def detectCycle(self, head):
-        try:
-            fast = head.next
-            slow = head
-            while fast is not slow:
-                fast = fast.next.next
-                slow = slow.next
-        except:
-            # if there is an exception, we reach the end and there is no cycle
-            return None
-
-        # since fast starts at head.next, we need to move slow one step forward
-        slow = slow.next
-        while head is not slow:
-            head = head.next
+        if not head:
+            return
+        slow  = head
+        fast = head.next
+        while fast and fast.next and fast != slow:
+            slow, fast = slow.next, fast.next.next
+        if fast == slow:
             slow = slow.next
-
-        return head        
+            while head != slow:
+                head, slow = head.next, slow.next
+            return slow
+        else:
+            return     
 
 head = ListNode(linked_list[0])
 x = head
