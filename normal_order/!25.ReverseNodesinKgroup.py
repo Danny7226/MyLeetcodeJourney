@@ -30,6 +30,7 @@ You may not alter the values in the list's nodes, only nodes itself may be chang
 #         self.next = None
 
 class Solution:
+    # run time O(L), space O(1)
     def reverseKGroup(self, head, k):
         dummy = jump = ListNode(0)
         dummy.next = l = r = head
