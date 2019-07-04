@@ -31,20 +31,20 @@ rotate 4 steps to the right: 2->0->1->NULL
 
 class Solution:
     def rotateRight(self, head: ListNode, k: int) -> ListNode:
-        if head is None:
-            return head
+        if not head:
+            return
+        nxt = head
         leng = 1
-        tmp = head
-        while tmp.next:
+        while head.next:
+            head = head.next
             leng += 1
-            tmp = tmp.next
-        tmp.next = head # make linked list a circle
-        tmp = head
-        for i in range(leng - k % leng - 1):
-            tmp = tmp.next
-        head = tmp.next 
-        tmp.next = None
-        return head
+        head.next = nxt
+        k = k % leng
+        cut = leng - k - 1
+        for _ in range(cut):
+            nxt = nxt.next
+        ans, nxt.next = nxt.next, None
+        return ans
 
 # class Solution:
 #     # very slow

@@ -44,21 +44,21 @@ class TreeNode:
         self.right = None
 
 class Solution:
-    def isBalanced(self, root: TreeNode) -> bool:
-        output = True
-        def check(depth, root):
-            if root == None:
-                return depth
-            m = check(depth + 1, root.left)
-            n = check(depth + 1, root.right)
-            print(m,n)
-            if abs(m-n) >= 2:
-                nonlocal output
-                output = False
-                print(output)
-                return max(m,n)
-            else:
-                return max(m,n)
+    def __init__(self):
+        self.Balanced = True
         
-        check(0,root)
-        return output
+    def isBalanced(self, root: TreeNode) -> bool:
+        if not root:
+            return True
+        self.maxDepth(root)
+        return self.Balanced
+    
+    def maxDepth(self, root):
+        if not root:
+            return 0
+        else:
+            ldepth = self.maxDepth(root.left)
+            rdepth = self.maxDepth(root.right)
+            if abs(ldepth - rdepth) >= 2:
+                self.Balanced = False
+            return max(ldepth, rdepth) + 1
