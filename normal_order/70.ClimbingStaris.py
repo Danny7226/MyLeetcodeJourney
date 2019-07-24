@@ -28,6 +28,17 @@ Explanation: There are three ways to climb to the top.
 
 '''
 n = 60
+    def climbStairs(self, n: int) -> int:
+        if n == 1:
+            return 1
+        dp = [0] * (n+1)
+        dp[1], dp[2] = 1, 2
+        i = 3
+        while i <= n:
+            dp[i] = dp[i-2] + dp[i-1]
+            i += 1
+        return dp[-1]
+        
 # class Solution:
 # 	# backtrack
 #     def climbStairs(self, n: int) -> int:

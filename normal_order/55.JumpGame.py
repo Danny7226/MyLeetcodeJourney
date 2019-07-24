@@ -29,6 +29,17 @@ Explanation: You will always arrive at index 3 no matter what. Its maximum
 nums = [0,2,3]
 
 class Solution:
+    def canJump(self, nums: List[int]) -> bool:
+        L = len(nums)
+        j = L - 1
+        i = j - 1
+        while i >= 0:
+            if i + nums[i] >= j:
+                j = i
+            i = i - 1
+        return j == 0
+        
+class Solution:
     # very fast, Greedy O(n)
     def canJump(self, nums: list) -> bool:
         lastpos = len(nums) - 1

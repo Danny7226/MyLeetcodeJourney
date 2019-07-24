@@ -25,51 +25,46 @@ Submissions
 2,218,611
 
 '''
-l = [-1, 0, 1, 2, -1, -4]
+l = [-1,0,1]
 
-d = {'a':1, 'b':2}
-for i, key in enumerate(d):
-	print(i,key, end = '    {0}.'.format(key))
-	print('value:', d.get(key))
+# d = {'a':1, 'b':2}
+# for i, key in enumerate(d):
+# 	print(i,key, end = '    {0}.'.format(key))
+# 	print('value:', d.get(key))
 
 
 class Solution:
-# Runtime: 792 ms, faster than 80.68% of Python3 online submissions for 3Sum.
-    def threeSum(nums: list) -> list:
-        nums.sort()
-        output = []
-        # print(nums)
-
-        for i in range(len(nums)-2):
-            if i > 0 and nums[i] == nums[i-1]:
-                # print(1)
+    def threeSum(self, nums: list) -> list:
+        ans = []
+        nums.sort() # O(nlgn)
+        for i in range(len(nums)-2): # O(n^2)
+            if i != 0 and nums[i] == nums[i-1]:
                 continue
-            minsum = nums[i] + nums[i+1] + nums[i+2]
-            maxsum = nums[i] + nums[-1] + nums[-2]
-            if(minsum > 0):
-                return output
-            if(maxsum < 0):
+            if nums[i] + nums[-1] + nums[-2] < 0:
                 continue
-            
-            
-            l = i+1
-            r = len(nums) - 1
-            while(l < r):
-                thsum = nums[i] + nums[l] + nums[r]
-                if thsum < 0 :
-                    l += 1
-                elif thsum > 0:
-                    r -= 1
+            if nums[i] + nums[i+1] + nums[i+2] > 0:
+                break
+            left, right = i+1, len(nums)-1
+            while left < right:
+                Sum = nums[i] + nums[left] + nums[right]
+                if Sum == 0:
+                    ans.append([nums[i], nums[left], nums[right]])
+                    if nums[left] == nums[right]:
+                        break
+                    left += 1
+                    while left < right and nums[left-1] == nums[left]:
+                        left += 1
+                        
+                    right -= 1
+                    while left < right and nums[right+1] == nums[right]:
+                        right -= 1
+                elif Sum > 0:
+                    right -= 1
+              
                 else:
-                    output.append([nums[i], nums[l], nums[r]])
-                    while l<r and nums[l] == nums[l+1]:
-                        l += 1
-                    while l<r and nums[r] == nums[r-1]:
-                        r -= 1
-                    l += 1
-                    r -= 1
-
-        return output
+                    left += 1
+  
+        return ans
 
 # class Solution:
 # Runtime: 344 ms, faster than 98.97% of Python3 online submissions for 3Sum.
@@ -99,4 +94,5 @@ class Solution:
 #                         res.append([y, s, x])
 #         return res
 
-print(Solution.threeSum(l))        
+s = Solution()
+print(s.threeSum(l))        

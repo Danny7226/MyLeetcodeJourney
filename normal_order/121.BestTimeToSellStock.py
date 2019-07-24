@@ -25,7 +25,6 @@ Output: 0
 Explanation: In this case, no transaction is done, i.e. max profit = 0.
 
 '''
-
 class Solution:
 	# one pass Dynamic Programing
     def maxProfit(self, prices: List[int]) -> int:
@@ -39,3 +38,31 @@ class Solution:
             if (i - pos) > max_profit:
                 max_profit = i - pos
         return max_profit
+
+    # O(N)
+    def maxProfit(self, prices: List[int]) -> int:
+        if not prices:
+            return 0
+        L = len(prices)
+        min_before = prices[0]
+        ans = 0
+        for i in range(1, len(prices)):
+            if prices[i] > min_before:
+                ans = max(ans, prices[i] - min_before)
+            else:
+                min_before = prices[i]
+        return ans
+
+
+    # heap, O(NlogN) 
+    def maxProfit(self, prices: List[int]) -> int:
+        if not prices:
+            return 0
+        before = []
+        ans = 0
+        heapq.heappush(before, prices[0])
+        for i in range(1, len(prices)):
+            if prices[i] > before[0]:
+                ans = max(ans, prices[i] - before[0])
+            heapq.heappush(before, prices[i])
+        return ans        

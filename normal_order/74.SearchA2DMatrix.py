@@ -34,29 +34,25 @@ Output: false
 '''
 matrix, target = [[1],[2],[3]], 3
 
-class Solution(object):
-def searchMatrix(self, matrix, target):
-    """
-    :type matrix: List[List[int]]
-    :type target: int
-    :rtype: bool
-    """
-    m = len(matrix)
-    n = len(matrix[0])
-    
-    xl = 0
-    xr = m*n-1
-    
-    while (True):
-        xm = (xl+xr)/2
-        if (matrix[xm/n][xm%n] == target):
-            return True
-        if (xl >= xr):
+class Solution:
+    def searchMatrix(self, matrix: list, target: int) -> bool:
+        if not matrix:
             return False
-        if (matrix[xm/n][xm%n] > target):
-            xr = xm-1
-        else:
-            xl = xm+1
+        row = len(matrix)
+        column = len(matrix[0])
+        left, right = 0, row * column - 1
+        while left <= right: 
+        # there is not necessary a target within matrix
+        # so we use '<='
+            mid = (left + right) // 2
+            cur = matrix[mid // column][mid % column]
+            if cur == target:
+                return True
+            elif cur > target:
+                right = mid - 1
+            else:
+                left = mid + 1
+        return False
             
 class Solution:
     def searchMatrix(self, matrix: list, target: int) -> bool:
