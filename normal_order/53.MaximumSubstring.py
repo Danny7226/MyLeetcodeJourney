@@ -20,6 +20,16 @@ If you have figured out the O(n) solution, try coding another solution using the
 '''
 nums = [-2,1,-3,4,-1,2,1,-5,4]
 class Solution:
+    def maxSubArray(self, nums: List[int]) -> int:
+        ans = - float('inf')
+        tmp = 0
+        for i in nums:
+            tmp += i
+            ans = max(ans, tmp)
+            if tmp < 0:
+                tmp = 0
+        return ans
+    
     def maxSubArray(self, nums: list) -> int:
         ptr1 = 0
         ptr2 = 0
