@@ -24,6 +24,16 @@ Given 1->2->3->4, you should return the list as 2->1->4->3.
 
 class Solution:
     def swapPairs(self, head: ListNode) -> ListNode:
+        dummy = ListNode(None)
+        dummy.next = head
+        ptr = dummy
+        while ptr.next and ptr.next.next:
+            p1, p2 = ptr.next, ptr.next.next
+            ptr.next, p1.next, p2.next, ptr = p2, p2.next, p1, p1
+        return dummy.next 
+        
+class Solution:
+    def swapPairs(self, head: ListNode) -> ListNode:
         head, head.next = self, head
         print(head)
         # tmp = head

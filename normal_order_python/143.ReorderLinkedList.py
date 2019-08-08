@@ -29,13 +29,19 @@ class Solution:
         """
         Do not return anything, modify head in-place instead.
         """
-        ll = [head]
-        while ll[-1] and ll[-1].next:
-            ll.append(ll[-1].next)
-        while len(ll)>=3:
-            ll[0].next, ll[-1].next, ll[-2].next = ll[-1], ll[1], None
-            ll.pop(0)
-            ll.pop()
+        if not head:
+            return []
+        ll = []
+        while head:
+            ll.append(head)
+            head= head.next
+        i, j = 0, len(ll)-1
+        # print(ll)
+        while i < j-1:
+            ll[j].next, ll[i].next = ll[i].next, ll[j]
+            i, j = i+1, j-1
+        ll[j].next = None
+        return ll[0]
 
     def reorderList(self, head: ListNode) -> None:
         # find mid Node and reverse the 2nd half LL
