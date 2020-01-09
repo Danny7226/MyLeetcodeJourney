@@ -18,8 +18,8 @@ public class MoviesOnFlight{
 	public static void main(String[] args){
 		int [] movieDurations = new int[]{90, 85, 75, 60, 120, 150, 125};
 		int d = 250;
-		int[] ans = Solutions.getAnswer(movieDurations, d);
-		System.out.println(ans[0] + " " + ans[1]);
+		int[] ans = Solutions.getAnswer(movieDurations, 10);
+		System.out.println(ans);
 	}
 }
 
@@ -32,6 +32,7 @@ class Solutions{
 			index.put(movieDurations[i], i);
 		}
 		Arrays.sort(movieDurations); // merge sort
+		if(movieDurations[0] + movieDurations[1] > d) return new int[]{};
 		int ptr1 = 0, ptr2 = movieDurations.length-1;
 		int cur, max = 0;
 		int[] ans = new int[2];

@@ -31,7 +31,7 @@
 
 public class PathWithMaximumScore{
     public static void main(String[] args){
-        int[][] matrix = new int[][]{{5, 1, 7}, {4, 8, 5}};
+        int[][] matrix = new int[][]{{0},{1},{2}}; // {{0}}; {}
         int ans = Solutions.getAnswer(matrix);
         System.out.println(ans);
     }
@@ -40,6 +40,7 @@ public class PathWithMaximumScore{
 class Solutions{
     public static int getAnswer(int[][] matrix){
         int rows = matrix.length, columns = matrix[0].length;
+        if(rows == 1 && columns == 1) return 0;
         int[][] dp = new int[rows][columns];
         dp[0][0] = Integer.MAX_VALUE;
         for(int i = 1; i < columns; i++){
